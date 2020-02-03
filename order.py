@@ -4,10 +4,11 @@ Created on Fri Oct  4 08:55:58 2019
 
 @author: user
 """
-
+import hardware.config as config
+#read 
 def orders():
-    
-    f = open('configurations\order.txt','r')
+    #read the orders.txt file
+    f = open(config.MODirectory ,'r')
     global decoded
     message = f.read()
     message = message.split('\n')
@@ -21,14 +22,15 @@ def orders():
     
     orderAmounts = [0 for i in range(len(message))]
     for i in range(0, len(message)):
-        decoded[i] = message[i].split('\t')
+        decoded[i] = message[i].split(';')
     for i in range(len(message)):
         orderNumbers[i] = decoded[i][0]
         productNumbers[i] = decoded[i][1]
         orderAmounts[i] = decoded[i][2]
     
+#save the information in arays
 
-
+#3 functions to return the amount, and P/MO numbers selected
 def returnOrder():
     orders()
     myValue = [0 for i in range(len(decoded))]
@@ -49,4 +51,4 @@ def returnAmount(MO):
         if (MO == returnOrder()[i]):
             return(orderAmounts[i])
 
-returnOrder()
+
